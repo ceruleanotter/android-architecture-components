@@ -7,11 +7,17 @@ android {
     defaultConfig {
         applicationId "com.example.android.persistence"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -42,6 +48,10 @@ dependencies {
     testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
     testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
     testCompile "android.arch.core:core-testing:$rootProject.architectureComponentsVersion"
+
+    // Resolve conflicts between main and local unit tests
+    testCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    testCompile "com.android.support:support-core-utils:$rootProject.supportLibraryVersion"
 
     // Android Testing Support Library's runner and rules
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
